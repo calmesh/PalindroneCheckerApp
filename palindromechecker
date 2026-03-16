@@ -1,0 +1,416 @@
+import java.util.*;
+import java.util.Deque;
+import java.util.ArrayDeque;
+
+public class PalindromeCheckerApp {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("======================================");
+        System.out.println("  Palindrome Checker Management System");
+        System.out.println("  Version: 1.0");
+        System.out.println("======================================");
+
+        System.out.println("Select Usecase (1-13): ");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (choice) {
+
+            case 1:
+                usecase1();
+                break;
+
+            case 2:
+                usecase2(scanner);
+                break;
+
+            case 3:
+                usecase3();
+                break;
+
+            case 4:
+                usecase4();
+                break;
+
+            case 5:
+                usecase5();
+                break;
+
+            case 6:
+                usecase6();
+                break;
+
+            case 7:
+                usecase7();
+                break;
+
+            case 8:
+                usecase8();
+                break;
+
+            case 9:
+                usecase9();
+                break;
+
+            case 10:
+                usecase10();
+                break;
+
+            case 11:
+                usecase11();
+                break;
+
+            case 12:
+                usecase12();
+                break;
+
+            case 13:
+                usecase13();
+                break;
+
+            default:
+                System.out.println("Invalid Choice");
+        }
+
+        scanner.close();
+    }
+
+    // Usecase 1
+    static void usecase1() {
+
+        String input = "madam";
+        boolean isPalindrome = true;
+
+        for (int j = 0; j < input.length() / 2; j++) {
+            if (input.charAt(j) != input.charAt(input.length() - 1 - j)) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome?: " + isPalindrome);
+    }
+
+    // Usecase 2
+    static void usecase2(Scanner scanner) {
+
+        System.out.print("Enter string: ");
+        String input = scanner.nextLine();
+
+        boolean isPalindrome = true;
+
+        for (int j = 0; j < input.length() / 2; j++) {
+            if (input.charAt(j) != input.charAt(input.length() - 1 - j)) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("Is Palindrome?: " + isPalindrome);
+    }
+
+    // Usecase 3
+    static void usecase3() {
+
+        String input = "radar";
+        char[] chars = input.toCharArray();
+
+        int start = 0;
+        int end = chars.length - 1;
+
+        boolean isPalindrome = true;
+
+        while (start < end) {
+
+            if (chars[start] != chars[end]) {
+                isPalindrome = false;
+                break;
+            }
+
+            start++;
+            end--;
+        }
+
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome?: " + isPalindrome);
+    }
+
+    // Usecase 4
+    static void usecase4() {
+
+        String input = "civic";
+
+        Queue<Character> queue = new LinkedList<>();
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : input.toCharArray()) {
+            queue.add(c);
+            stack.push(c);
+        }
+
+        boolean isPalindrome = true;
+
+        while (!queue.isEmpty()) {
+
+            if (queue.remove() != stack.pop()) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome?: " + isPalindrome);
+    }
+
+    // Usecase 5
+    static void usecase5() {
+
+        String input = "refer";
+        Deque<Character> deque = new ArrayDeque<>();
+
+        for (char c : input.toCharArray()) {
+            deque.addLast(c);
+        }
+
+        boolean isPalindrome = true;
+
+        while (deque.size() > 1) {
+
+            char first = deque.removeFirst();
+            char last = deque.removeLast();
+
+            if (first != last) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome?: " + isPalindrome);
+    }
+
+    // Usecase 6
+    static void usecase6() {
+
+        String input = "noon";
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        boolean isPalindrome = true;
+
+        for (char c : input.toCharArray()) {
+
+            if (c != stack.pop()) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome?: " + isPalindrome);
+    }
+
+    // Usecase 7
+    static void usecase7() {
+
+        String input = "level";
+        LinkedList<Character> list = new LinkedList<>();
+
+        for (char c : input.toCharArray()) {
+            list.add(c);
+        }
+
+        boolean isPalindrome = true;
+
+        while (list.size() > 1) {
+
+            if (list.removeFirst() != list.removeLast()) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome?: " + isPalindrome);
+    }
+
+    // Usecase 8 (Recursion)
+    static void usecase8() {
+
+        String input = "madam";
+        boolean result = checkRec(input, 0, input.length() - 1);
+
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome?: " + result);
+    }
+
+    static boolean checkRec(String s, int start, int end) {
+
+        if (start >= end)
+            return true;
+
+        if (s.charAt(start) != s.charAt(end))
+            return false;
+
+        return checkRec(s, start + 1, end - 1);
+    }
+
+    // Usecase 9
+    static void usecase9() {
+
+        String input = "A man a plan a canal Panama";
+
+        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+        boolean isPalindrome = true;
+
+        for (int i = 0; i < normalized.length() / 2; i++) {
+
+            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("Original: " + input);
+        System.out.println("Normalized: " + normalized);
+        System.out.println("Is Palindrome?: " + isPalindrome);
+    }
+
+    // Usecase 10
+    static void usecase10() {
+
+        String input = "racecar";
+
+        PalindromeService service = new PalindromeService();
+
+        boolean result = service.checkPalindrome(input);
+
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome?: " + result);
+    }
+
+    // Usecase 11
+    static void usecase11() {
+
+        String input = "noon";
+
+        PalindromeStrategy strategy = new StackStrategy();
+
+        boolean result = strategy.check(input);
+
+        System.out.println("Using Strategy: StackStrategy");
+        System.out.println("Is Palindrome?: " + result);
+    }
+
+    // Usecase 12
+    static void usecase12() {
+
+        String input = "A man a plan a canal Panama"
+                .replaceAll("[^a-zA-Z0-9]", "")
+                .toLowerCase();
+
+        PalindromeStrategy strategy = new TwoPointerStrategy();
+
+        long start = System.nanoTime();
+        boolean result = strategy.check(input);
+        long end = System.nanoTime();
+
+        System.out.println("Execution Time: " + (end - start));
+        System.out.println("Is Palindrome?: " + result);
+    }
+
+    // Usecase 13 (Performance comparison)
+    static void usecase13() {
+
+        String input = "racecar";
+
+        PalindromeStrategy s1 = new TwoPointerStrategy();
+        PalindromeStrategy s2 = new StackStrategy();
+
+        long start1 = System.nanoTime();
+        s1.check(input);
+        long end1 = System.nanoTime();
+
+        long start2 = System.nanoTime();
+        s2.check(input);
+        long end2 = System.nanoTime();
+
+        System.out.println("Two Pointer Time: " + (end1 - start1));
+        System.out.println("Stack Strategy Time: " + (end2 - start2));
+    }
+}
+
+class PalindromeService {
+
+    public boolean checkPalindrome(String input) {
+
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+
+            start++;
+            end--;
+        }
+
+        return true;
+    }
+}
+
+interface PalindromeStrategy {
+    boolean check(String input);
+}
+
+class StackStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        for (char c : input.toCharArray()) {
+
+            if (c != stack.pop()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+class TwoPointerStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+
+            start++;
+            end--;
+        }
+
+        return true;
+    }
+}
